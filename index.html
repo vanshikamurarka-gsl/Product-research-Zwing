@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indian POS Market — Competitive Feature Matrix</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1e28;
+    --border: #252936;
+    --accent: #00e5a0;
+    --accent2: #ff6b6b;
+    --accent3: #ffd166;
+    --accent4: #7c86ff;
+    --text: #e8eaf2;
+    --muted: #6b7280;
+    --header-bg: #161926;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 44px 24px 60px;
+    background-image:
+      radial-gradient(ellipse 70% 40% at 5% 5%, rgba(0,229,160,0.05) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 35% at 95% 95%, rgba(124,134,255,0.06) 0%, transparent 55%);
+  }
+
+  .container { max-width: 1400px; margin: 0 auto; }
+
+  /* ── Header ── */
+  .page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .page-header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    color: #fff;
+  }
+
+  .page-header h1 span { color: var(--accent); }
+
+  .page-header p {
+    margin-top: 7px;
+    font-size: 12.5px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.2px;
+  }
+
+  .legend {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    font-size: 11.5px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 7px; }
+
+  /* ── Table wrapper ── */
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.55);
+    animation: fadeUp 0.45s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+
+  /* ── Sticky columns ── */
+  /* Col 1: Feature name  — 170px */
+  /* Col 2: Explanation   — 260px */
+  th:nth-child(1), td:nth-child(1) {
+    position: sticky; left: 0; z-index: 12;
+    min-width: 170px; max-width: 170px; width: 170px;
+  }
+  th:nth-child(2), td:nth-child(2) {
+    position: sticky; left: 170px; z-index: 11;
+    min-width: 260px; max-width: 260px; width: 260px;
+  }
+
+  thead th:nth-child(1), thead th:nth-child(2) { background: var(--header-bg); }
+  tbody td:nth-child(1), tbody td:nth-child(2)  { background: var(--surface); }
+
+  /* shadow divider after col 2 */
+  th:nth-child(2), td:nth-child(2) {
+    box-shadow: 4px 0 12px rgba(0,0,0,0.35);
+  }
+
+  /* ── Header rows ── */
+  thead tr:first-child th {
+    background: var(--header-bg);
+    padding: 20px 13px 15px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: var(--accent);
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+  }
+
+  thead tr:first-child th:nth-child(1) {
+    text-align: left;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  thead tr:first-child th:nth-child(2) {
+    text-align: left;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.3px;
+    border-bottom: 2px solid var(--border);
+    border-left: 1px solid var(--border);
+  }
+
+  thead tr:nth-child(2) th {
+    background: var(--header-bg);
+    padding: 5px 13px 10px;
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 300;
+    text-align: center;
+    font-style: italic;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  thead tr:nth-child(2) th:nth-child(1),
+  thead tr:nth-child(2) th:nth-child(2) { text-align: left; }
+
+  /* ── Section header rows ── */
+  .section-header td {
+    background: var(--surface2) !important;
+    padding: 9px 16px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2.2px;
+    color: var(--accent3);
+    border-top: 2px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Data rows ── */
+  tbody tr:not(.section-header) { border-bottom: 1px solid var(--border); }
+
+  tbody tr:not(.section-header):hover td              { background: rgba(0,229,160,0.025) !important; }
+  tbody tr:not(.section-header):hover td:nth-child(1),
+  tbody tr:not(.section-header):hover td:nth-child(2) { background: rgba(0,229,160,0.045) !important; }
+
+  tbody td {
+    padding: 13px 13px;
+    background: var(--surface);
+    vertical-align: top;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+
+  /* Feature name cell */
+  tbody td:nth-child(1) {
+    text-align: left;
+    font-weight: 600;
+    color: var(--text);
+    font-size: 12.5px;
+    line-height: 1.4;
+    border-right: 1px solid var(--border);
+    padding: 14px 14px;
+    vertical-align: top;
+  }
+
+  /* Explanation cell */
+  tbody td:nth-child(2) {
+    text-align: left;
+    font-size: 11.5px;
+    color: #9ca3af;
+    font-weight: 300;
+    line-height: 1.65;
+    border-right: 2px solid var(--border);
+    padding: 12px 15px;
+    vertical-align: top;
+  }
+
+  .why-india {
+    display: block;
+    margin-top: 6px;
+    font-size: 10.5px;
+    color: rgba(255,209,102,0.7);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .why-india::before {
+    content: '🇮🇳 ';
+    font-style: normal;
+  }
+
+  /* Icon cells */
+  .icon-cell { padding-top: 14px; }
+
+  .yes {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: rgba(0,229,160,0.12); color: var(--accent); font-size: 14px;
+  }
+  .no {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: rgba(255,107,107,0.1); color: var(--accent2); font-size: 14px;
+  }
+  .partial {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: rgba(255,209,102,0.1); color: var(--accent3); font-size: 12px; font-weight: 700;
+  }
+
+  /* ── Footer ── */
+  .footnote {
+    margin-top: 20px;
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .footnote span { display: flex; align-items: center; gap: 6px; }
+  .footnote .right { margin-left: auto; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-header">
+    <div>
+      <h1>Indian POS Market<br><span>Competitive Feature Matrix</span></h1>
+      <p>10 strategic players · 28 features across 7 dimensions · India-context explanations · Browntape Research 2025</p>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><span class="yes">✓</span> Fully supported</div>
+      <div class="legend-item"><span class="partial">~</span> Partial / via add-on</div>
+      <div class="legend-item"><span class="no">✕</span> Not available</div>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>What it means &amp; why it matters in India</th>
+          <th>TallyPrime</th>
+          <th>Pine Labs</th>
+          <th>Petpooja</th>
+          <th>Marg ERP</th>
+          <th>Vyapar</th>
+          <th>Ginesys</th>
+          <th>BharatPe</th>
+          <th>GoFrugal</th>
+          <th>Restroworks</th>
+          <th>Shopify POS</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>Compliance</th>
+          <th>Payment Hub</th>
+          <th>F&amp;B Vertical</th>
+          <th>Pharma Vertical</th>
+          <th>Micro-Merchant</th>
+          <th>Omnichannel</th>
+          <th>Fintech</th>
+          <th>Ecosystem</th>
+          <th>Global F&amp;B</th>
+          <th>D2C / eComm</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- ══ BUSINESS MODEL ══ -->
+        <tr class="section-header"><td colspan="12">Business Model &amp; Pricing</td></tr>
+
+        <tr>
+          <td>Subscription-based pricing</td>
+          <td>Recurring monthly or annual fee for software access, typically tiered by number of outlets or users.
+            <span class="why-india">Predictable costs matter for Indian SMBs managing tight cash flows; subscription models have seen rapid adoption post-GST as businesses moved from pirated desktop software.</span>
+          </td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>Transaction / commission fees</td>
+          <td>Revenue model where the platform earns a percentage of every payment processed rather than charging a flat software fee.
+            <span class="why-india">Common in fintech-first players targeting the vast unorganised retail base; lowers the barrier to adoption but creates misaligned incentives as merchants scale.</span>
+          </td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>Freemium / free tier</td>
+          <td>A usable free version that captures small merchants before upselling to paid plans.
+            <span class="why-india">Extremely effective in India's Tier 2–3 markets where willingness-to-pay is low initially; Vyapar and BharatPe built massive user bases this way before monetising.</span>
+          </td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+        </tr>
+
+        <tr>
+          <td>Enterprise / custom pricing</td>
+          <td>Bespoke contracts with volume discounts, dedicated support, and custom SLA terms for large deployments.
+            <span class="why-india">Indian enterprise chains often negotiate heavily; without a custom pricing path, vendors get blocked at the mid-market ceiling.</span>
+          </td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <!-- ══ CORE POS ══ -->
+        <tr class="section-header"><td colspan="12">Core POS Capabilities</td></tr>
+
+        <tr>
+          <td>Billing &amp; invoicing</td>
+          <td>Core transaction flow — creating, printing, and storing customer-facing bills or tax invoices at point of sale.
+            <span class="why-india">GST-compliant invoicing is non-negotiable since 2017; any POS without it is immediately disqualified for registered businesses. B2B invoicing requirements add further complexity.</span>
+          </td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>Inventory management</td>
+          <td>Real-time tracking of stock levels, purchase orders, and low-stock alerts, linked directly to every sale.
+            <span class="why-india">Indian retail suffers from chronic stockout and over-stocking cycles due to manual processes. Integrated inventory is the #1 reason SMBs upgrade from basic billing tools.</span>
+          </td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>Multi-location / multi-outlet</td>
+          <td>Manage multiple store branches from one dashboard — consolidated P&amp;L, shared inventory visibility, and centralised pricing or menu control.
+            <span class="why-india">The single biggest gap for growing Indian chains. Most vertical tools were built for a single outlet; multi-location is often bolted on and breaks under scale.</span>
+          </td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>Offline mode / low connectivity</td>
+          <td>POS continues transacting during internet outages; records are stored locally and synced to the cloud once connectivity returns.
+            <span class="why-india">Internet reliability remains patchy in Tier 2–3 cities and malls during peak hours. A POS that goes down with the internet is a business liability, not a solution.</span>
+          </td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+        </tr>
+
+        <tr>
+          <td>Mobile POS (mPOS)</td>
+          <td>Full or partial POS functionality running on a smartphone or tablet, allowing billing from anywhere in the store or at events.
+            <span class="why-india">India's low hardware cost sensitivity and high Android penetration make mPOS a natural fit. It also enables pop-up formats and kirana-style counter replacement without expensive terminals.</span>
+          </td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <!-- ══ COMPLIANCE ══ -->
+        <tr class="section-header"><td colspan="12">Compliance &amp; Financial Integration</td></tr>
+
+        <tr>
+          <td>GST compliance &amp; filing</td>
+          <td>Automatic tax calculation, invoice formatting per GST rules, and support for GSTR-1/3B return preparation or direct filing.
+            <span class="why-india">India's GST regime has over 5 tax slabs and complex HSN/SAC code mapping. Non-compliance carries penalties; this is a baseline requirement, not a differentiator.</span>
+          </td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+        </tr>
+
+        <tr>
+          <td>E-invoice / e-way bill</td>
+          <td>Government-mandated digital invoice generation (IRP portal) and e-way bill for goods movement above ₹50,000 in value.
+            <span class="why-india">Mandatory for businesses above ₹5 crore turnover and phasing down further. International SaaS players like Shopify have struggled to implement this; it's a moat for India-first vendors.</span>
+          </td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+        </tr>
+
+        <tr>
+          <td>Built-in payment processing</td>
+          <td>Native acceptance of UPI, cards, wallets, and BNPL without requiring a separate payment gateway integration.
+            <span class="why-india">UPI now accounts for over 50% of retail transactions in India. A POS that forces a separate payment app creates friction; seamless UPI reconciliation is increasingly expected.</span>
+          </td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>Embedded lending / BNPL</td>
+          <td>Access to working capital loans or buy-now-pay-later credit directly within the POS platform, using transaction history as a credit proxy.
+            <span class="why-india">Credit access is the #1 constraint for Indian SMBs. POS players with embedded lending (Pine Labs, BharatPe) are capturing massive stickiness by solving a pain point banks ignore.</span>
+          </td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+        </tr>
+
+        <!-- ══ VERTICAL ══ -->
+        <tr class="section-header"><td colspan="12">Vertical Specialisation</td></tr>
+
+        <tr>
+          <td>F&amp;B / restaurant workflows</td>
+          <td>Table management, KOT (kitchen order tickets), recipe costing, modifier-based ordering, and delivery platform integrations (Swiggy/Zomato).
+            <span class="why-india">India's restaurant sector is the largest organised vertical in retail POS. Generic POS tools consistently lose to F&B specialists because the operational model is fundamentally different from retail.</span>
+          </td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+        </tr>
+
+        <tr>
+          <td>Pharma / batch &amp; expiry tracking</td>
+          <td>Drug batch number tracking, expiry date management, Schedule H drug controls, and integration with drug distributor networks.
+            <span class="why-india">Mandatory under Indian drug regulations; a pharma retailer cannot legally operate without batch-level tracking. This creates an extremely high switching cost and natural moat for Marg ERP.</span>
+          </td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+        </tr>
+
+        <tr>
+          <td>Retail / fashion &amp; apparel</td>
+          <td>Size/colour matrix, season-based catalogues, barcode label printing, alteration tracking, and vendor return management.
+            <span class="why-india">Apparel is India's second-largest retail category and highly fragmented. Fast fashion chains expanding from metros to Tier 2 cities need POS that handles variants natively, not as workarounds.</span>
+          </td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>Cross-vertical support</td>
+          <td>A single platform that can serve businesses across F&amp;B, retail, services, and other categories without needing separate vertical products.
+            <span class="why-india">Multi-format operators (e.g., a group running restaurants, a bakery, and a retail store) currently stitch together multiple tools. This gap defines the mid-market white space in India.</span>
+          </td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+        </tr>
+
+        <!-- ══ OMNICHANNEL ══ -->
+        <tr class="section-header"><td colspan="12">Omnichannel &amp; eCommerce</td></tr>
+
+        <tr>
+          <td>Online store / eCommerce sync</td>
+          <td>Two-way synchronisation between the physical store POS and an owned online store — products, prices, and inventory stay in sync automatically.
+            <span class="why-india">Post-COVID, even kirana-level retailers have WhatsApp-based ordering. Brands expanding from D2C online to physical retail need seamless sync; operating two separate systems creates errors and losses.</span>
+          </td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>Marketplace integration (Amazon, Flipkart)</td>
+          <td>Native connectors to list products, receive orders, and deduct inventory from major Indian marketplaces directly through the POS.
+            <span class="why-india">India's eCommerce is marketplace-dominated. A multi-channel seller managing Amazon, Flipkart, Meesho, and a physical store without integration will inevitably oversell and face penalties.</span>
+          </td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>Unified inventory (online + offline)</td>
+          <td>A single source of truth for stock across all channels — physical stores, website, and marketplaces — updated in real time.
+            <span class="why-india">Overselling is one of the top causes of marketplace account suspension in India. Businesses that have solved this problem report it as their biggest operational improvement after switching to a unified system.</span>
+          </td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>D2C brand tooling</td>
+          <td>Features designed for direct-to-consumer brands — branded storefronts, customer data ownership, subscription products, and offline pop-up support.
+            <span class="why-india">India's D2C wave (boAt, Mamaearth, Sugar Cosmetics, etc.) is now entering physical retail rapidly. These brands need a POS that feels like an extension of their digital stack, not a traditional retail tool.</span>
+          </td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <!-- ══ ANALYTICS ══ -->
+        <tr class="section-header"><td colspan="12">Analytics, CRM &amp; Customer Engagement</td></tr>
+
+        <tr>
+          <td>Sales &amp; revenue dashboards</td>
+          <td>Real-time and historical view of sales performance by product, category, staff, outlet, and time period.
+            <span class="why-india">Indian business owners are increasingly data-literate but time-poor. A mobile-accessible dashboard that delivers daily sales summaries is one of the most commonly cited reasons for product stickiness in this market.</span>
+          </td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>Customer loyalty program</td>
+          <td>Points-based or tiered rewards system tied to purchase history, managed directly within the POS without a third-party tool.
+            <span class="why-india">India's loyalty market is underpenetrated compared to its retail scale. Local brands running loyalty natively retain customers 2–3x better than those relying on generic stamp cards or external apps.</span>
+          </td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>Built-in CRM</td>
+          <td>Customer profiles linked to purchase history, enabling segmentation, follow-up campaigns, and personalised service — without exporting data to a separate CRM tool.
+            <span class="why-india">Most Indian SMBs cannot afford or integrate a standalone CRM. Embedding even basic customer profiling within POS dramatically improves repeat-purchase rates and reduces churn.</span>
+          </td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>Advanced analytics / BI</td>
+          <td>Beyond standard reports — cohort analysis, predictive restocking, staff performance scoring, and customisable BI exports or integrations.
+            <span class="why-india">Still a premium feature in India, primarily relevant for chains with 10+ outlets or revenues above ₹10 crore. The market is beginning to demand this as founders become more analytically driven.</span>
+          </td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <!-- ══ TARGET SEGMENT ══ -->
+        <tr class="section-header"><td colspan="12">Target Segment Fit</td></tr>
+
+        <tr>
+          <td>Micro / solo merchant</td>
+          <td>Designed for a single-person operation — simple UI, minimal setup, low or no cost, and works on a basic Android smartphone.
+            <span class="why-india">India has over 60 million kirana and micro-merchants. This segment is volume-driven and price-sensitive; monetisation is slow but the distribution flywheel is enormous once cracked.</span>
+          </td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+        </tr>
+
+        <tr>
+          <td>SMB / growing business</td>
+          <td>A business with 1–3 outlets, 5–50 staff, and ₹50L–5Cr annual revenue — outgrowing basic tools but not yet ready for full ERP.
+            <span class="why-india">This is the most contested and strategically important segment in Indian POS. It is large, underserved, and actively looking for solutions — but also the most price-negotiation-heavy cohort.</span>
+          </td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>Mid-market (multi-outlet)</td>
+          <td>A business with 4–50 outlets, dedicated ops/finance teams, and revenue above ₹5 crore — needing centralised control without full enterprise overhead.
+            <span class="why-india">This is the identified white space. No player currently dominates this cross-vertical mid-market segment in India. The businesses here are actively switching and willing to pay for a real solution.</span>
+          </td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr>
+          <td>Enterprise / large chain</td>
+          <td>50+ outlets, ERP integrations, complex org hierarchies, dedicated IT teams, and multi-state operations requiring advanced compliance and SLA commitments.
+            <span class="why-india">Dominated by legacy ERP vendors and global platforms. Indian enterprise deals take 6–18 months to close; price is less sensitive but implementation and compliance support are critical.</span>
+          </td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="partial">~</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="no">✕</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+          <td class="icon-cell"><span class="yes">✓</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footnote">
+    <span><span class="yes">✓</span> Fully supported as a core product feature</span>
+    <span><span class="partial">~</span> Partial support, via add-on, or third-party integration</span>
+    <span><span class="no">✕</span> Not available</span>
+    <span class="right">Browntape Competitive Intelligence · Feb 2025</span>
+  </div>
+
+</div>
+</body>
+</html>
